@@ -1,6 +1,6 @@
 # Courier Design System — File Index
 
-> Complete map of every file in this repo. 38 files across 7 directories.
+> Complete map of every file in this repo. 28 files across 8 directories.
 
 ---
 
@@ -81,36 +81,16 @@ Product strategy based on real user interview.
 
 ## `designs/`
 
-Visual references showing the design system in action.
-
-### Current Product Pages (Dark)
+Dashboard preview for README hero image.
 
 | File | What It Shows |
 |------|---------------|
-| `courier-dashboard-preview.png` | Dashboard — sidebar, metric cards, model cards, chart area |
-| `courier-workbench-preview.png` | Workbench — model playground, parameter controls, chat interface |
-| `courier-analytics-preview.png` | Analytics — performance charts, request metrics, latency graphs |
-| `courier-settings-preview.png` | Settings — server config, API keys, model management |
+| `courier-dashboard-preview.png` | Dashboard concept — sidebar, metric cards, model cards, chart area |
 
-### Vision Pages (Dark)
+## `docs/specs/`
 
-| File | What It Shows |
+Design specifications. These are the real deliverables — detailed enough for Claude Code to build from.
+
+| File | What It Covers |
 |------|---------------|
-| `vision-projects-preview.png` | Projects — 48px icon rail, metric strip, 2-col card grid, activity feed |
-| `vision-training-preview.png` | Training — runs table with progress bars, loss curve, GPU resource meters |
-| `vision-agent-preview.png` | Agent — chat interface with rich responses, agent context panel, capabilities |
-
-### Vision Pages (Light)
-
-| File | What It Shows |
-|------|---------------|
-| `vision-projects-light.png` | Projects (light) — warm surfaces, stacked shadows, same density |
-| `vision-training-light.png` | Training (light) — light mode standalone experience |
-| `vision-agent-light.png` | Agent (light) — light mode chat interface |
-
-### Brand & Style
-
-| File | What It Shows |
-|------|---------------|
-| `style-guide.png` | Color palette, typography, spacing, component showcase |
-| `brand-guidelines.png` | Brand identity, logo usage, design principles |
+| `2026-03-22-training-page-design.md` | Complete Training page spec — three training modes (Teach/Recipe/Onboard), territory world map, campaign roadmaps, guardrails system, workbench progression, gamification scoping |
