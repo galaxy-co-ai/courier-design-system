@@ -1,6 +1,6 @@
 # Courier Design System — File Index
 
-> Complete map of every file in this repo. 26 files across 7 directories.
+> Complete map of every file in this repo. 38 files across 7 directories.
 
 ---
 
@@ -83,6 +83,34 @@ Product strategy based on real user interview.
 
 Visual references showing the design system in action.
 
+### Current Product Pages (Dark)
+
 | File | What It Shows |
 |------|---------------|
-| `courier-dashboard-preview.png` | Dashboard mockup — sidebar, metric cards, model cards, chart area |
+| `courier-dashboard-preview.png` | Dashboard — sidebar, metric cards, model cards, chart area |
+| `courier-workbench-preview.png` | Workbench — model playground, parameter controls, chat interface |
+| `courier-analytics-preview.png` | Analytics — performance charts, request metrics, latency graphs |
+| `courier-settings-preview.png` | Settings — server config, API keys, model management |
+
+### Vision Pages (Dark)
+
+| File | What It Shows |
+|------|---------------|
+| `vision-projects-preview.png` | Projects — 48px icon rail, metric strip, 2-col card grid, activity feed |
+| `vision-training-preview.png` | Training — runs table with progress bars, loss curve, GPU resource meters |
+| `vision-agent-preview.png` | Agent — chat interface with rich responses, agent context panel, capabilities |
+
+### Vision Pages (Light)
+
+| File | What It Shows |
+|------|---------------|
+| `vision-projects-light.png` | Projects (light) — warm surfaces, stacked shadows, same density |
+| `vision-training-light.png` | Training (light) — light mode standalone experience |
+| `vision-agent-light.png` | Agent (light) — light mode chat interface |
+
+### Brand & Style
+
+| File | What It Shows |
+|------|---------------|
+| `style-guide.png` | Color palette, typography, spacing, component showcase |
+| `brand-guidelines.png` | Brand identity, logo usage, design principles |
