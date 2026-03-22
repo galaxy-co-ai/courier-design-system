@@ -28,9 +28,16 @@ This is the most important file in the repo. It's based on a real interview with
 
 ### Quick Start
 
+1. Clone this repo
+2. Give `BOOTSTRAP.md` to your Claude Code — it reads the repo and wires everything into your Courier project automatically
+3. Read the product brief (`product-brief/COURIER-PRODUCT-BRIEF.md`)
+4. Run the design system prompts in order (`design-system/prompts/00-09`)
+
+### Manual Setup (if you prefer)
+
 1. Read the product brief first (`product-brief/COURIER-PRODUCT-BRIEF.md`)
 2. Copy `CLAUDE.md` into your Courier project root
-3. Copy `skills/` into your project
+3. Copy `skills/`, `constitution/`, and `product-brief/` into your project
 4. Run the design system prompts in order (`design-system/prompts/00-09`)
 
 ### The Promise
