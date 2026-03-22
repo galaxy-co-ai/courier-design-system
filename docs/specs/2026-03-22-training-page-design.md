@@ -1,6 +1,6 @@
 # Courier Training Page — Design Specification
 
-> **Status:** Draft
+> **Status:** Draft v2
 > **Date:** 2026-03-22
 > **Authors:** Dalton Cox, Claude (Alfred)
 > **Scope:** Complete redesign of the Training experience for Courier's local AI model platform
@@ -15,7 +15,7 @@ The Training page is redesigned around three core principles:
 2. **Three distinct training modes** (Teach, Recipe, Onboard) with unique layouts, components, and emotional framing — recommended by the Courier Agent per model.
 3. **Training progress unlocks Workbench tools,** creating a natural progression where users earn capabilities as they develop skills. Zero cost to Courier.
 
-The page uses a two-level architecture: a **World Map** showing all models as territories, and a **Campaign Roadmap** when drilling into a specific model's training journey.
+The page uses a two-level architecture: a **Model Roster** showing all models with training status and progress, and a **Model Detail** view when drilling into a specific model's training workspace.
 
 ---
 
@@ -63,14 +63,14 @@ Jackson has expressed affinity for Unsloth. Current status:
 
 ```
 Training (graduation-cap icon in rail)
-├── Level 1: Training Home (World Map)
+├── Level 1: Training Home (Model Roster)
 │   ├── Active Training Banner
-│   ├── Territory Overview (all models)
+│   ├── Model Roster (all models, grouped by project)
 │   ├── Workbench Build Meter
 │   └── Recent Runs History
 │
-└── Level 2: Model Territory (Campaign)
-    ├── Campaign Roadmap (node path)
+└── Level 2: Model Detail (Training Workspace)
+    ├── Model Header + Progress Milestones
     ├── Agent Mode Recommendation
     ├── Training Experience (mode-specific)
     │   ├── Mode A: TEACH
@@ -83,7 +83,9 @@ Training (graduation-cap icon in rail)
 
 ---
 
-## Level 1: Training Home — "The World Map"
+## Level 1: Training Home — Model Roster
+
+A clean list of every model being trained, grouped by project. Think Linear's issue list or Vercel's project dashboard — professional, scannable, dense.
 
 ### Section 1: Active Training Banner
 
@@ -101,22 +103,29 @@ Training (graduation-cap icon in rail)
 
 ---
 
-### Section 2: Territory Overview
+### Section 2: Model Roster
 
-**Purpose:** Show all models across all projects as territories. Each territory shows training progress at a glance.
+**Purpose:** Show all models across all projects with training status at a glance.
 
-**Component: Territory Card**
+**Component: Model Roster Row**
 
-| Property | Details |
-|----------|---------|
-| Model name | e.g., "courier-chat-v3" |
-| Project | e.g., "QuickClaimsAI" |
-| Training mode icon | Teach (graduation-cap) / Recipe (flask) / Onboard (user-plus) |
-| Roadmap progress | "4/10 nodes cleared" with mini progress ring |
-| Quality grade | A/B/C/D or "Ungraded" |
-| Status | Active / Idle / Production Ready |
+Each model is a row in a grouped list. Rows are grouped by project with a project header.
 
-**Layout:** Grid of territory cards, grouped by project. Not a geographical map — a clean card grid with personality and clear status at a glance. One tap to enter a territory.
+| Column | Content |
+|--------|---------|
+| Model name | e.g., "courier-chat-v3" — primary text, clickable to drill in |
+| Training mode | Icon + label (Teach / Recipe / Onboard) — agent-recommended, color-coded |
+| Quality grade | Letter grade with color (A=green, B=cyan, C=amber, D=red) or "—" if ungraded |
+| Progress | Milestone count ("5/8") with compact progress bar |
+| Improvement | Percentage improvement over base model (e.g., "+14%") |
+| Status | Active (green dot) / Idle / Production Ready (checkmark) |
+| Last run | Relative timestamp ("2h ago", "3 days ago") |
+
+**Layout:** Rows grouped under project headers. Each project header shows project name and model count. Dense but readable — no cards, no grid. Rows.
+
+**Interaction:** Click a row to enter the Model Detail view.
+
+**Empty state:** "No models in training yet. Start by adding a model to a project and clicking New Run."
 
 ---
 
@@ -130,13 +139,13 @@ Training (graduation-cap icon in rail)
 - Small icon grid of unlocked (full color) vs locked (ghosted) tools
 - Users can see what's coming — locked tools are visible, not hidden
 
-**Placement:** Below territories, above runs history. Connective tissue between Training and Workbench.
+**Placement:** Below roster, above runs history. Connective tissue between Training and Workbench.
 
 ---
 
 ### Section 4: Recent Runs History
 
-**Purpose:** Historical view of training activity.
+**Purpose:** Historical view of training activity across all models.
 
 **Component: Run History Table (compact)**
 
@@ -145,43 +154,46 @@ Training (graduation-cap icon in rail)
 | Model | Name + mode icon |
 | Date | Relative timestamp |
 | Duration | e.g., "2h 14m" |
-| Quality | Letter grade with color (A=green, B=cyan, C=amber, D=red) |
+| Quality | Letter grade with color |
 | Result | One-line summary ("Improved 12% over base") |
 | Unlock | Workbench tool earned (if any) |
 
 ---
 
-## Level 2: Model Territory — "The Campaign"
+## Level 2: Model Detail — Training Workspace
 
-### Section 5: Campaign Roadmap
+When a user clicks a model row, they enter that model's dedicated training workspace.
 
-**Purpose:** Visual path from base model to production-ready.
+### Section 5: Model Header + Progress Milestones
 
-**Component: Node Path**
+**Purpose:** Show the model's identity, current state, and progress through training milestones.
 
-8-12 nodes arranged as a vertical or gently curved path. Each node has:
-- Icon + name
-- Status: locked (ghosted) / available (pulsing) / completed (filled + glow)
-- Perk earned (for completed nodes)
-- Branch points as forks with brief descriptions
+**Component: Model Header**
+- Model name, base model, project
+- Training mode badge (agent-recommended, with override option)
+- Quality grade (large, prominent)
+- Status indicator
 
-**Standard Campaign Nodes:**
+**Component: Milestone Bar**
 
-| # | Node Name | Milestone | Workbench Unlock |
-|---|-----------|-----------|-----------------|
-| 1 | Data Foundation | Upload 50+ examples | Data Quality Dashboard |
-| 2 | First Run | Complete first training run (any grade) | Model Comparison View |
-| 3 | Finding Its Voice | Beat base model by 10% | Prompt Template Library |
-| 4 | Consistency | Score B+ on 3 consecutive runs | Batch Testing Mode |
-| 5 | Edge Cases | Pass "Where It Struggles" challenge | Advanced Analytics |
-| 6 | Branch Point | Choose: Specialize Deep vs. Go Broad | — |
-| 7 | Expert Level | Achieve A grade run | API Playground |
-| 8 | Battle Tested | Pass edge case evaluation suite | Production Deploy Pipeline |
-| 9 | Production Ready | Deploy with quality gate passed | Monitoring Dashboard |
+A horizontal progress bar with labeled milestone markers. Not a game path — a professional progress indicator like a multi-step form or deployment pipeline.
 
-**Design reference:** Super Mario World overworld — spatial clarity of "I'm here, I've been there, that's ahead." Not literal pixel art.
+8 milestones arranged left to right:
 
-**Post-completion:** After reaching Production Ready, the map shifts to a "Maintenance" mode — ongoing quality monitoring, retraining suggestions when data drifts.
+| # | Milestone | Trigger | Workbench Unlock |
+|---|-----------|---------|-----------------|
+| 1 | Data Ready | Upload 50+ examples | Data Quality Dashboard |
+| 2 | First Run | Complete first training run | Model Comparison View |
+| 3 | Improving | Beat base model by 10% | Prompt Template Library |
+| 4 | Consistent | Score B+ on 3 consecutive runs | Batch Testing Mode |
+| 5 | Edge-Tested | Pass the "Where It Struggles" review | Advanced Analytics |
+| 6 | High Quality | Achieve A grade run | API Playground |
+| 7 | Validated | Pass edge case evaluation suite | Production Deploy Pipeline |
+| 8 | Production | Deploy with quality gate passed | Monitoring Dashboard |
+
+**Visual:** Completed milestones are filled and labeled. Current milestone is highlighted. Future milestones are outlined/dimmed. The next workbench unlock is called out below the bar.
+
+**Post-completion:** After reaching Production, the milestone bar stays completed and the view shifts focus to ongoing monitoring and retraining suggestions.
 
 ---
 
@@ -322,11 +334,11 @@ Each mode has a distinct layout, component set, and emotional framing.
 
 | Guardrail | What It Checks | Visual |
 |-----------|---------------|--------|
-| Volume | Minimum example count (floor: 10, warning: 10-50, good: 50+) | 🟢🟡🔴 |
-| Diversity | Semantic similarity analysis across examples | 🟢🟡🔴 |
-| Consistency | Contradiction detection between examples | 🟢🟡🔴 |
-| Formatting | HTML artifacts, encoding issues, length variance | 🟢🟡🔴 |
-| Source Quality | AI-generated content flagging, spot-check prompt | 🟢🟡🔴 |
+| Volume | Minimum example count (floor: 10, warning: 10-50, good: 50+) | Green / Amber / Red |
+| Diversity | Semantic similarity analysis across examples | Green / Amber / Red |
+| Consistency | Contradiction detection between examples | Green / Amber / Red |
+| Formatting | HTML artifacts, encoding issues, length variance | Green / Amber / Red |
+| Source Quality | AI-generated content flagging, spot-check prompt | Green / Amber / Red |
 
 **System-enforced guardrails (non-UI):**
 
@@ -342,7 +354,7 @@ Each mode has a distinct layout, component set, and emotional framing.
 
 ### Section 9: Training Progress (Active Run)
 
-**Component: Progress Theater**
+**Component: Training Progress Panel**
 
 | Element | Description |
 |---------|------------|
@@ -351,8 +363,8 @@ Each mode has a distinct layout, component set, and emotional framing.
 | Quality projection | Updating in real-time ("On track for B+") |
 | Checkpoint samples | Periodic before/after comparisons as model trains |
 | Fluctuation normalizer | "Performance dip is normal — reorganizing knowledge" |
-| Workbench countdown | "2 more epochs until you unlock Batch Testing" |
-| Roadmap progress | Current node indicator |
+| Workbench countdown | "Completing this run unlocks Batch Testing" |
+| Milestone progress | Current milestone indicator |
 
 ---
 
@@ -367,7 +379,7 @@ Each mode has a distinct layout, component set, and emotional framing.
 | Strengths | What the model does well now (bulleted) |
 | Growth areas | What to train on next (bulleted, actionable) |
 | Workbench unlock | Tool earned, with "Go to Workbench" action |
-| Roadmap node | Visual confirmation of cleared node + next node preview |
+| Milestone cleared | Confirmation + next milestone preview |
 | Agent suggestion | Recommended next action |
 
 ---
@@ -378,16 +390,16 @@ Training progress unlocks Workbench tools. Users start with a basic workbench an
 
 ### Unlock Sequence
 
-| Roadmap Node | Workbench Unlock | Why At This Stage |
-|-------------|-----------------|-------------------|
-| Data Foundation | Data Quality Dashboard | User is working with data, needs quality tools |
+| Milestone | Workbench Unlock | Why At This Stage |
+|-----------|-----------------|-------------------|
+| Data Ready | Data Quality Dashboard | User is working with data, needs quality tools |
 | First Run | Model Comparison View | User now has two things to compare (base vs. fine-tuned) |
-| Finding Its Voice | Prompt Template Library | User understands input patterns, ready for templates |
-| Consistency | Batch Testing Mode | User has reliable model, ready to test at scale |
-| Edge Cases | Advanced Analytics | User has seen struggles, ready for deeper metrics |
-| Expert Level | API Playground with Auth | User is deploying, needs programmatic access |
-| Battle Tested | Production Deploy Pipeline | User has proven quality, ready for production |
-| Production Ready | Monitoring Dashboard | Model is live, needs ongoing observation |
+| Improving | Prompt Template Library | User understands input patterns, ready for templates |
+| Consistent | Batch Testing Mode | User has reliable model, ready to test at scale |
+| Edge-Tested | Advanced Analytics | User has seen struggles, ready for deeper metrics |
+| High Quality | API Playground with Auth | User is deploying, needs programmatic access |
+| Validated | Production Deploy Pipeline | User has proven quality, ready for production |
+| Production | Monitoring Dashboard | Model is live, needs ongoing observation |
 
 ### Design Rules
 
@@ -398,29 +410,29 @@ Training progress unlocks Workbench tools. Users start with a basic workbench an
 
 ---
 
-## Gamification Scope
+## Engagement & Rewards (Phased)
 
 ### V1 (Launch)
-- Campaign roadmap with node progression
+- Milestone progression (professional, not gamified)
 - Quality grades (A/B/C/D) on every run
 - Workbench unlocks tied to training milestones
 - "Beat the Base" improvement percentage
 - Agent-recommended next actions
 
 ### V2 (With User Data)
-- Booster packs with real-cost perks (API credits, compute)
-- Conversion funnel optimization based on actual usage patterns
-- Model evolution timeline (visual history across all runs)
+- Training rewards: quality runs earn platform perks (feature unlocks, extended compute, pro model trial access)
+- Perk tiers scaled to training quality — must meet guardrail standards to qualify
+- Conversion funnel: earned perks introduce premium features users then want to keep
 
 ### V3 (With Scale)
-- Model bounties with partner-funded rewards
-- Hot streak multipliers
-- Community showcase for Production Ready models
-- Seasonal challenges (if user base supports it)
+- Partner-funded rewards (model providers supply API credits for training activity on their models)
+- Community showcase for production-ready models
+- Cross-model progression bonuses
 
 ### Never
 - Points, XP, or leveling systems
 - Leaderboards
+- World maps, campaigns, or game-themed UI
 - Participation trophy badges
 - Animations that slow the user down
 - Notifications that feel like a mobile game
@@ -463,18 +475,16 @@ Thresholds: A (90+), B (75-89), C (60-74), D (below 60)
 
 ## Open Questions
 
-1. **Roadmap customization:** Should power users be able to add custom nodes to their roadmap, or is the standard 8-12 node campaign fixed?
-2. **Cross-model progression:** Does training Model A contribute to workbench unlocks that benefit Model B, or is each territory independent?
+1. **Milestone customization:** Should power users be able to add custom milestones, or is the standard 8-step sequence fixed?
+2. **Cross-model progression:** Does training Model A contribute to workbench unlocks that benefit Model B, or is each model independent?
 3. **Team features:** If Courier adds multi-user support, do training milestones belong to the user or the project?
-4. **Offline resilience:** How does the roadmap/progression system work if the user is fully offline (no cloud services for bounties/perks)?
-5. **Mode switching mid-campaign:** Can a user change from Teach to Recipe mode mid-roadmap, or does it restart the campaign?
+4. **Offline resilience:** How does the progression system work if the user is fully offline?
+5. **Mode switching mid-progress:** Can a user change from Teach to Recipe mode mid-training, or does it reset milestone context?
 
 ---
 
 ## Next Steps
 
-1. Gather UI references for visual direction
-2. Rebuild Training page in Pencil.dev reflecting this architecture
-3. Design the World Map and Campaign Roadmap visual patterns
-4. Design mode-specific layouts for Teach, Recipe, and Onboard
-5. Update the courier-design-system repo with new Training vision
+1. Design the Workbench page spec (the core operational experience that training feeds into)
+2. Define the complete page inventory across all of Courier
+3. Build in code — real Next.js components with real Tailwind, not wireframes
