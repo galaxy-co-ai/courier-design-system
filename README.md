@@ -79,9 +79,17 @@ Run these in order. Each prompt is self-contained — tells Claude Code exactly 
 |------|---------|
 | [`COURIER-PRODUCT-BRIEF.md`](product-brief/COURIER-PRODUCT-BRIEF.md) | User research, competitive landscape, proposed IA, design patterns |
 
+### `docs/specs/` — Design Specifications
+
+Detailed specs for features that go beyond the base design system. These are deep enough for Claude Code to build from without wireframes.
+
+| File | What It Covers |
+|------|---------------|
+| [`Training Page`](docs/specs/2026-03-22-training-page-design.md) | Three training modes (Teach/Recipe/Onboard), territory world map, campaign roadmaps, guardrail system, workbench progression, gamification scoping |
+
 ### `research/` — Source Material
 
-Reference only. You don't need to read these unless you're curious about the process behind the deliverables.
+Reference only — the process behind the deliverables.
 
 | File | Purpose |
 |------|---------|
